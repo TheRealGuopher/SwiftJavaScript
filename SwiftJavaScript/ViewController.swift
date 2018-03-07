@@ -12,12 +12,19 @@ import JavaScriptCore
 class ViewController: UIViewController {
 
     var jsContext: JSContext!
-    var jsSourceContents: [String] = []
+    var jsSourceContents: [String: String] = [:]
+    var stringNames: [String] = []
+    var intNames: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         self.jsContext = JSContext()
+        intNames.append("getNum")
         initializeJSFile(filename: "getNum", jsContext: jsContext)
-        sampleOneDemo()
+        stringNames.append("getName")
+        initializeJSFile(filename: "getName", jsContext: jsContext)
+//        let num = sampleIntDemo()
+//        print(num)
+        sampleStringDemo(name: "Harden", num: 2)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -27,14 +34,8 @@ class ViewController: UIViewController {
         var jsFunction = ""
         if let jsSourcePath = Bundle.main.path(forResource: filename, ofType: "js") {
             do {
-                // Load its contents to a String variable.
-                jsFunction = try String(contentsOfFile: jsSourcePath)
-                jsSourceContents.append(jsFunction)
-                
-                // Add the Javascript code that currently exists in the jsSourceContents to the Javascript Runtime through the jsContext object.
-                var s = jsContext.evaluateScript("getNum()")
-                print(s)
-                //                print(jsContext.objectForKeyedSubscript("getName"))
+                jsFunction = try String(contentsOfFile: jsSourcePath) // Load its contents to a String variable.
+                jsSourceContents[filename] = jsFunction // load function name to actual function text
             }
             catch {
                 print(error.localizedDescription)
@@ -42,19 +43,42 @@ class ViewController: UIViewController {
         }
     }
     
-    func sampleOneDemo() {
+    func sampleIntDemo() -> Int {
         let num = 2
         var realNum = 0
-        print(jsSourceContents[0])
-        jsContext.evaluateScript(jsSourceContents[0])
-        if let functionFullname = jsContext.objectForKeyedSubscript("getNum") {
+//        for i in 0..<intNames.count {
+            let methodName = intNames[0]
+            print(methodName)
+            jsContext.evaluateScript(jsSourceContents[methodName])
+            if let functionFullname = jsContext.objectForKeyedSubscript(methodName) {
+                // Call the function that composes the fullname.
+                print(self.jsContext.objectForKeyedSubscript(methodName))
+                if let fullname = functionFullname.call(withArguments: [num]) {
+                    realNum = fullname.toNumber() as! Int
+                }
+            }
+//        }
+        return realNum
+    }
+    
+    func sampleStringDemo(name: String, num: Int) {
+        var realString = ""
+//        for i in 0..<stringNames.count {
+        let methodName = stringNames[0]
+        print(methodName)
+        print(jsSourceContents[methodName])
+        jsContext.evaluateScript(jsSourceContents[methodName])
+        if let functionFullname = jsContext.objectForKeyedSubscript(methodName) {
             // Call the function that composes the fullname.
-            print(self.jsContext.objectForKeyedSubscript("getNum"))
-            if let fullname = functionFullname.call(withArguments: [num]) {
-                realNum = fullname.toNumber() as! Int
-                print(realNum)
+            print(self.jsContext.objectForKeyedSubscript("getName"))
+            if let fullname = functionFullname.call(withArguments: [name, num]) {
+                realString = (fullname.toString())!
+                print(realString)
             }
         }
+//        }
+    }
+        
 //        if let functionFullname = jsContext1.objectForKeyedSubscript("getNum") {
 //            // Call the function that composes the fullname.
 //            print(self.jsContext1.objectForKeyedSubscript("getNum"))
@@ -70,7 +94,6 @@ class ViewController: UIViewController {
 //            }
 //        }
 //        print("RealName: \(realName)")
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

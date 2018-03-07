@@ -1,3 +1,3 @@
-    function getNum(num) {
-        return num * 2
-    }
+function getNum(num) {
+    return num * 2
+}
