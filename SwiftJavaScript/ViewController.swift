@@ -19,12 +19,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.jsContext = JSContext()
         intNames.append("getNum")
-        initializeJSFile(filename: "getNum", jsContext: jsContext)
-        stringNames.append("getName")
-        initializeJSFile(filename: "getName", jsContext: jsContext)
+        initializeJSFile(filename: "classTest", jsContext: jsContext)
+        sampleClassDemo()
+//        initializeJSFile(filename: "getNum", jsContext: jsContext)
+//        stringNames.append("getName")
+//        initializeJSFile(filename: "getName", jsContext: jsContext)
 //        let num = sampleIntDemo()
 //        print(num)
-        sampleStringDemo(name: "Harden", num: 2)
+//        sampleStringDemo(name: "Harden", num: 2)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -41,6 +43,22 @@ class ViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    // https://medium.com/swift-programming/from-swift-to-javascript-and-back-fd1f6a7a9f46
+    func sampleClassDemo() -> Int {
+        let moment = jsContext.evaluateScript("ClassTest('name').getNum()")
+        print(moment)
+        let fn = jsContext.objectForKeyedSubscript("moment")
+        print(fn)
+//        if let functionFullname = jsContext.objectForKeyedSubscript(methodName) {
+//            // Call the function that composes the fullname.
+//            print(self.jsContext.objectForKeyedSubscript(methodName))
+//            if let fullname = functionFullname.call(withArguments: [num]) {
+//                realNum = fullname.toNumber() as! Int
+//            }
+//        }
+        return 1
     }
     
     func sampleIntDemo() -> Int {

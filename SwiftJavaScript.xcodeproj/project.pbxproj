@@ -16,6 +16,7 @@
 		DAC40B7B2040907C0070E484 /* SwiftJavaScriptUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC40B7A2040907C0070E484 /* SwiftJavaScriptUITests.swift */; };
 		DAD9A19A204F7D5300E3AA5F /* getNum.js in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A199204F7D5300E3AA5F /* getNum.js */; };
 		DAD9A19C204F841500E3AA5F /* getName.js in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A19B204F841500E3AA5F /* getName.js */; };
+		DAD9A19E204FA91A00E3AA5F /* classTest.js in Resources */ = {isa = PBXBuildFile; fileRef = DAD9A19D204FA91900E3AA5F /* classTest.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		DAC40B7C2040907C0070E484 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAD9A199204F7D5300E3AA5F /* getNum.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = getNum.js; sourceTree = "<group>"; };
 		DAD9A19B204F841500E3AA5F /* getName.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = getName.js; sourceTree = "<group>"; };
+		DAD9A19D204FA91900E3AA5F /* classTest.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = classTest.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				DAC40B5A2040907C0070E484 /* AppDelegate.swift */,
 				DAC40B5C2040907C0070E484 /* ViewController.swift */,
+				DAD9A19D204FA91900E3AA5F /* classTest.js */,
 				DAD9A199204F7D5300E3AA5F /* getNum.js */,
 				DAD9A19B204F841500E3AA5F /* getName.js */,
 				DAC40B5E2040907C0070E484 /* Main.storyboard */,
@@ -243,6 +246,7 @@
 				DAD9A19C204F841500E3AA5F /* getName.js in Resources */,
 				DAC40B622040907C0070E484 /* Assets.xcassets in Resources */,
 				DAC40B602040907C0070E484 /* Main.storyboard in Resources */,
+				DAD9A19E204FA91A00E3AA5F /* classTest.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
